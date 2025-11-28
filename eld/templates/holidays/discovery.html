@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block title %}Discover Holidays - eld{% endblock %}
+
+{% block content %}
+<div x-data="{ 
+    view: '{{ view_type }}',
+    search: '',
+    country: '',
+    category: ''
+}">
+    <!-- Header -->
+    <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            🌍 Discover <span class="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Every Celebration</span>
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400">
+            Browse holidays worldwide. Click to add to your calendar instantly.
+        </p>
+    </div>
+    
+    <!-- View Switcher -->
+    <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg mb-8">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+            <!-- View Buttons -->
+            <div class="flex space-x-2">
+                <button 
+                    @click="view = 'week'" 
+                    :class="view === 'week' ? 'bg-purple-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'"
+                    class="px-4 py-2 rounded-lg font-semibold transition"
+                    hx-get="{% url 'holidays:week_view' %}"
+                    hx-target="#holiday-content"
+                    hx-indicator="#loading"
+                >
+                    📅 Next 7 Days
+                </button>
+                
+                <button 
+                    @click="view = 'month'" 
+                    :class="view === 'month' ? 'bg-purple-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'"
+                    class="px-4 py-2 rounded-lg font-semibold transition"
+                    hx-get="{% url 'holidays:month_view' %}"
+                    hx-target="#holiday-content"
+                    hx-indicator="#loading"
+                >
+                    📆 This Month
+                </button>
+                
+                <button 
+                    @click="view = 'year'" 
+                    :class="view === 'year' ? 'bg-purple-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'"
+                    class="px-4 py-2 rounded-lg font-semibold transition"
+                    hx-get="{% url 'holidays:year_view' %}"
+                    hx-target="#holiday-content"
+                    hx-indicator="#loading"
+                >
+                    🗓️ Full Year
+                </button>
+            </div>
+        </div>
+        
+        <!-- Filters -->
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Search -->
+            <div>
+                <input 
+                    type="text" 
+                    x-model="search"
+                    placeholder="🔍 Search holidays..."
+                    class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                    hx-get="{% url 'holidays:week_view' %}"
+                    hx-trigger="keyup changed delay:500ms"
+                    hx-target="#holiday-content"
+                    hx-include="[name='country'],[name='category']"
+                    name="search"
+                >
+            </div>
+            
+            <!-- Country Filter -->
+            <div>
+                <select 
+                    x-model="country"
+                    name="country"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                    hx-get="{% url 'holidays:week_view' %}"
+                    hx-trigger="change"
+                    hx-target="#holiday-content"
+                    hx-include="[name='search'],[name='category']"
+                >
+                    <option value="">🌍 All Countries</option>
+                    {% for country in countries %}
+                        <option value="{{ country.code }}">{{ country.flag_emoji }} {{ country.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <!-- Category Filter -->
+            <div>
+                <select 
+                    x-model="category"
+                    name="category"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                    hx-get="{% url 'holidays:week_view' %}"
+                    hx-trigger="change"
+                    hx-target="#holiday-content"
+                    hx-include="[name='search'],[name='country']"
+                >
+                    <option value="">🎯 All Types</option>
+                    {% for category in categories %}
+                        <option value="{{ category.slug }}">{{ category.icon }} {{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Indicator -->
+    <div id="loading" class="htmx-indicator text-center py-8">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-4 border-purple-500"></div>
+        <p class="mt-4 text-gray-600 dark:text-gray-400">Loading celebrations...</p>
+    </div>
+    
+    <!-- Holiday Content -->
+    <div 
+        id="holiday-content"
+        hx-get="{% url 'holidays:week_view' %}"
+        hx-trigger="load"
+        hx-indicator="#loading"
+    >
+        <!-- Content loads here via HTMX -->
+    </div>
+</div>
+{% endblock %}

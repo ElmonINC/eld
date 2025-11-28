@@ -1,0 +1,66 @@
+<!-- Week View: Next 7 Days with Countdowns -->
+
+{% if holidays %}
+    <!-- Hero Section with Countdown -->
+    <div class="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-3xl p-8 mb-8 text-white shadow-2xl">
+        {% with first_holiday=holidays.0 %}
+            <div class="text-center">
+                <div class="text-6xl mb-4">{{ first_holiday.country_flags|default:"🎉" }}</div>
+                <h2 class="text-4xl font-bold mb-2">{{ first_holiday.name }}</h2>
+                <p class="text-2xl mb-4">{{ first_holiday.date|date:"l, F j, Y" }}</p>
+                
+                <!-- Countdown -->
+                <div class="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-xl px-6 py-3">
+                    <span class="text-3xl font-bold" id="countdown-days">
+                        {% widthratio first_holiday.date|timeuntil:"" 86400 1 %}
+                    </span>
+                    <span class="text-xl">days to go! 🎊</span>
+                </div>
+                
+                {% if first_holiday.description %}
+                    <p class="mt-4 text-lg opacity-90">{{ first_holiday.description }}</p>
+                {% endif %}
+            </div>
+        {% endwith %}
+    </div>
+    
+    <!-- Holiday Cards Grid -->
+    <div>
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+            <span class="mr-3">📅</span>
+            Next 7 Days
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for holiday in holidays %}
+                {% include 'holidays/partials/holiday_card.html' with holiday=holiday is_saved=holiday.id in saved_holiday_ids %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- View All Link -->
+    <div class="text-center mt-12">
+        <button 
+            class="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transition"
+            hx-get="{% url 'holidays:month_view' %}"
+            hx-target="#holiday-content"
+            hx-indicator="#loading"
+        >
+            📆 View Full Month
+        </button>
+    </div>
+    
+{% else %}
+    <div class="text-center py-16">
+        <div class="text-6xl mb-4">🔍</div>
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">No holidays in the next 7 days</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">Try viewing the full month or year</p>
+        <button 
+            class="px-6 py-3 bg-purple-500 text-white rounded-lg font-semibold hover:shadow-lg transition"
+            hx-get="{% url 'holidays:month_view' %}"
+            hx-target="#holiday-content"
+            hx-indicator="#loading"
+        >
+            View Month
+        </button>
+    </div>
+{% endif %}

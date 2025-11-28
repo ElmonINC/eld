@@ -1,0 +1,134 @@
+<!-- Year View: Full 12-Month Expandable Grid -->
+
+<div class="mb-8" x-data="{ expandedMonths: [] }">
+    <!-- Year Header -->
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h3 class="text-3xl font-bold text-gray-900 dark:text-white flex items-center">
+                <span class="mr-3">🗓️</span>
+                {{ year }} Calendar
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">All celebrations for the year</p>
+        </div>
+        
+        <!-- Year Selector -->
+        <div class="flex items-center space-x-2">
+            <button 
+                class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+                hx-get="{% url 'holidays:year_view' %}?year={{ year|add:-1 }}"
+                hx-target="#holiday-content"
+                hx-indicator="#loading"
+            >
+                ←
+            </button>
+            <span class="px-4 py-2 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-lg font-bold">
+                {{ year }}
+            </span>
+            <button 
+                class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+                hx-get="{% url 'holidays:year_view' %}?year={{ year|add:1 }}"
+                hx-target="#holiday-content"
+                hx-indicator="#loading"
+            >
+                →
+            </button>
+        </div>
+    </div>
+    
+    <!-- 12-Month Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for month_num in "123456789101112"|make_list %}
+            {% with month_num=month_num|add:0 %}
+                <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden">
+                    <!-- Month Header -->
+                    <button 
+                        @click="expandedMonths.includes({{ month_num }}) ? expandedMonths = expandedMonths.filter(m => m !== {{ month_num }}) : expandedMonths.push({{ month_num }})"
+                        class="w-full px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-lg flex items-center justify-between hover:shadow-lg transition"
+                    >
+                        <span>{{ month_num|date:"F"|default:"Month" }}</span>
+                        <div class="flex items-center space-x-2">
+                            {% if months|length > 0 and month_num in months %}
+                                <span class="px-2 py-1 bg-white/20 rounded-full text-sm">
+                                    {{ months|get_item:month_num|length }}
+                                </span>
+                            {% else %}
+                                <span class="px-2 py-1 bg-white/20 rounded-full text-sm">0</span>
+                            {% endif %}
+                            <span x-show="!expandedMonths.includes({{ month_num }})">▼</span>
+                            <span x-show="expandedMonths.includes({{ month_num }})">▲</span>
+                        </div>
+                    </button>
+                    
+                    <!-- Month Content (Expandable) -->
+                    <div 
+                        x-show="expandedMonths.includes({{ month_num }})"
+                        x-transition
+                        class="p-4 space-y-3 max-h-96 overflow-y-auto"
+                    >
+                        {% if month_num in months %}
+                            {% for holiday in months|get_item:month_num %}
+                                <div class="p-3 bg-gray-50 dark:bg-gray-900 rounded-lg hover:shadow-md transition">
+                                    <div class="flex items-start justify-between mb-2">
+                                        <div class="flex-1">
+                                            <h5 class="font-semibold text-gray-900 dark:text-white text-sm">
+                                                {{ holiday.name }}
+                                            </h5>
+                                            <p class="text-xs text-gray-600 dark:text-gray-400">
+                                                {{ holiday.date|date:"M j" }}
+                                            </p>
+                                        </div>
+                                        <span class="text-xl">{{ holiday.country_flags|default:"🌍" }}</span>
+                                    </div>
+                                    
+                                    <!-- Quick Add Button -->
+                                    {% if user.is_authenticated %}
+                                        {% if holiday.id in saved_holiday_ids %}
+                                            <span class="text-xs text-green-600 dark:text-green-400">✓ Saved</span>
+                                        {% else %}
+                                            <button 
+                                                class="w-full mt-2 px-3 py-1 bg-purple-500 text-white text-xs rounded hover:bg-purple-600 transition"
+                                                hx-post="{% url 'holidays:add_to_calendar' holiday.id %}"
+                                                hx-swap="outerHTML"
+                                                onclick="confetti({ particleCount: 50, spread: 50, origin: { y: 0.7 } });"
+                                            >
+                                                + Add
+                                            </button>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-center text-gray-500 dark:text-gray-400 text-sm py-4">
+                                No holidays this month
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endwith %}
+        {% endfor %}
+    </div>
+    
+    <!-- Back Button -->
+    <div class="text-center mt-12">
+        <button 
+            class="px-8 py-4 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:shadow-lg transition"
+            hx-get="{% url 'holidays:month_view' %}"
+            hx-target="#holiday-content"
+            hx-indicator="#loading"
+        >
+            ← Back to Month View
+        </button>
+    </div>
+</div>
+
+<!-- Template filter to get dictionary items (add to a custom template tag file) -->
+{% comment %}
+You'll need to add this custom template filter in apps/holidays/templatetags/holiday_filters.py:
+
+from django import template
+register = template.Library()
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+{% endcomment %}

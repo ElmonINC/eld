@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block title %}My Calendar - eld{% endblock %}
+
+{% block content %}
+<div>
+    <!-- Header -->
+    <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            🎉 Your <span class="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Personal Calendar</span>
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400">
+            {{ total_count }} celebration{{ total_count|pluralize }} waiting for you
+        </p>
+    </div>
+    
+    <!-- Export Section -->
+    <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-8 shadow-2xl mb-12">
+        <div class="text-center mb-6">
+            <h2 class="text-3xl font-bold text-white mb-2">📲 Sync Your Holidays</h2>
+            <p class="text-white/90">Add all your holidays to your favorite calendar app instantly</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            <!-- Google Calendar -->
+            <a 
+                href="https://calendar.google.com/calendar/r?cid={{ calendar.feed_url }}"
+                target="_blank"
+                class="bg-white text-gray-900 px-6 py-4 rounded-xl font-semibold hover:shadow-xl transition flex items-center justify-center space-x-2"
+            >
+                <span>📅</span>
+                <span>Google Calendar</span>
+            </a>
+            
+            <!-- Apple Calendar -->
+            <a 
+                href="{{ calendar.feed_url }}"
+                class="bg-white text-gray-900 px-6 py-4 rounded-xl font-semibold hover:shadow-xl transition flex items-center justify-center space-x-2"
+            >
+                <span>🍎</span>
+                <span>Apple Calendar</span>
+            </a>
+            
+            <!-- Download .ics -->
+            <a 
+                href="{% url 'calendars:download_ics' %}"
+                class="bg-white text-gray-900 px-6 py-4 rounded-xl font-semibold hover:shadow-xl transition flex items-center justify-center space-x-2"
+            >
+                <span>💾</span>
+                <span>Download .ics</span>
+            </a>
+        </div>
+        
+        <!-- Feed URL -->
+        <div class="mt-6 bg-white/20 backdrop-blur-sm rounded-xl p-4">
+            <p class="text-white text-sm mb-2">Or copy your personal feed URL:</p>
+            <div class="flex items-center space-x-2">
+                <input 
+                    type="text" 
+                    value="{{ calendar.ics_url }}"
+                    readonly
+                    class="flex-1 px-4 py-2 bg-white/90 text-gray-900 rounded-lg text-sm font-mono"
+                    onclick="this.select()"
+                >
+                <button 
+                    onclick="navigator.clipboard.writeText('{{ calendar.ics_url }}'); alert('Copied!');"
+                    class="px-4 py-2 bg-white text-purple-600 rounded-lg font-semibold hover:shadow-lg transition"
+                >
+                    📋 Copy
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Upcoming Holidays -->
+    {% if upcoming %}
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                <span class="mr-3">⏰</span>
+                Coming Up (Next 30 Days)
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for user_holiday in upcoming %}
+                    {% include 'holidays/partials/holiday_card.html' with holiday=user_holiday.holiday is_saved=True %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    
+    <!-- Future Holidays -->
+    {% if future %}
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                <span class="mr-3">🔮</span>
+                Future Celebrations
+            </h2>
+            <div class="space-y-2">
+                {% for user_holiday in future %}
+                    <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg p-4 flex items-center justify-between hover:shadow-lg transition">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-2xl">{{ user_holiday.holiday.country_flags|default:"🌍" }}</span>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 dark:text-white">{{ user_holiday.holiday.name }}</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">{{ user_holiday.holiday.date|date:"F j, Y" }}</p>
+                            </div>
+                        </div>
+                        <button 
+                            class="px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition"
+                            hx-post="{% url 'holidays:remove_from_calendar' user_holiday.holiday.id %}"
+                            hx-target="closest div"
+                            hx-swap="outerHTML swap:1s"
+                            hx-confirm="Remove {{ user_holiday.holiday.name }} from your calendar?"
+                        >
+                            Remove
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    
+    <!-- Past Holidays -->
+    {% if past %}
+        <div>
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                <span class="mr-3">📜</span>
+                Celebrated This Year
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {% for user_holiday in past %}
+                    <div class="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-lg p-4 opacity-75">
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">{{ user_holiday.holiday.date|date:"M j" }}</p>
+                        <h4 class="font-semibold text-gray-900 dark:text-white text-sm">{{ user_holiday.holiday.name }}</h4>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    
+    {% if not upcoming and not future and not past %}
+        <div class="text-center py-16">
+            <div class="text-6xl mb-4">📭</div>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Your calendar is empty</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">Start discovering holidays to build your personal celebration calendar!</p>
+            <a 
+                href="{% url 'holidays:discovery' %}"
+                class="inline-block px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl transition"
+            >
+                🔍 Discover Holidays
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

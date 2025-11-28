@@ -1,0 +1,157 @@
+[
+  {
+    "model": "holidays.holidaycategory",
+    "pk": 1,
+    "fields": {
+      "name": "Public Holiday",
+      "slug": "public",
+      "category_type": "public",
+      "color": "#3B82F6",
+      "icon": "🏛️"
+    }
+  },
+  {
+    "model": "holidays.holidaycategory",
+    "pk": 2,
+    "fields": {
+      "name": "Religious",
+      "slug": "religious",
+      "category_type": "religious",
+      "color": "#8B5CF6",
+      "icon": "🙏"
+    }
+  },
+  {
+    "model": "holidays.holidaycategory",
+    "pk": 3,
+    "fields": {
+      "name": "International Day",
+      "slug": "international",
+      "category_type": "international",
+      "color": "#10B981",
+      "icon": "🌍"
+    }
+  },
+  {
+    "model": "holidays.holidaycategory",
+    "pk": 4,
+    "fields": {
+      "name": "Fun & Quirky",
+      "slug": "fun",
+      "category_type": "fun",
+      "color": "#F59E0B",
+      "icon": "🎊"
+    }
+  },
+  {
+    "model": "holidays.holidaycategory",
+    "pk": 5,
+    "fields": {
+      "name": "Seasonal",
+      "slug": "seasonal",
+      "category_type": "seasonal",
+      "color": "#EC4899",
+      "icon": "🌸"
+    }
+  },
+  {
+    "model": "holidays.country",
+    "pk": 1,
+    "fields": {
+      "code": "US",
+      "name": "United States",
+      "flag_emoji": "🇺🇸",
+      "region": "North America"
+    }
+  },
+  {
+    "model": "holidays.country",
+    "pk": 2,
+    "fields": {
+      "code": "GB",
+      "name": "United Kingdom",
+      "flag_emoji": "🇬🇧",
+      "region": "Europe"
+    }
+  },
+  {
+    "model": "holidays.country",
+    "pk": 3,
+    "fields": {
+      "code": "CA",
+      "name": "Canada",
+      "flag_emoji": "🇨🇦",
+      "region": "North America"
+    }
+  },
+  {
+    "model": "holidays.country",
+    "pk": 4,
+    "fields": {
+      "code": "AU",
+      "name": "Australia",
+      "flag_emoji": "🇦🇺",
+      "region": "Oceania"
+    }
+  },
+  {
+    "model": "holidays.country",
+    "pk": 5,
+    "fields": {
+      "code": "IN",
+      "name": "India",
+      "flag_emoji": "🇮🇳",
+      "region": "Asia"
+    }
+  },
+  {
+    "model": "holidays.country",
+    "pk": 6,
+    "fields": {
+      "code": "DE",
+      "name": "Germany",
+      "flag_emoji": "🇩🇪",
+      "region": "Europe"
+    }
+  },
+  {
+    "model": "holidays.country",
+    "pk": 7,
+    "fields": {
+      "code": "FR",
+      "name": "France",
+      "flag_emoji": "🇫🇷",
+      "region": "Europe"
+    }
+  },
+  {
+    "model": "holidays.country",
+    "pk": 8,
+    "fields": {
+      "code": "BR",
+      "name": "Brazil",
+      "flag_emoji": "🇧🇷",
+      "region": "South America"
+    }
+  },
+  {
+    "model": "holidays.country",
+    "pk": 9,
+    "fields": {
+      "code": "JP",
+      "name": "Japan",
+      "flag_emoji": "🇯🇵",
+      "region": "Asia"
+    }
+  },
+  {
+    "model": "holidays.country",
+    "pk": 10,
+    "fields": {
+      "code": "MX",
+      "name": "Mexico",
+      "flag_emoji": "🇲🇽",
+      "region": "North America"
+    }
+  }
+]
