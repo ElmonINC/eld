@@ -1,0 +1,291 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+/media
+/staticfiles
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Node / npm (for Tailwind CSS)
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Redis
+dump.rdb
+
+# Docker
+.dockerignore
+
+# OS
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.hypothesis/
+
+# Misc
+*.bak
+*.backup
+*.tmp
+*.swp
+*.swo
+*~
+.env.example.local
+secrets/
+private/
+
+# Lock files (allow requirements.txt, lock with pip-tools if used)
+# poetry.lock
+# Pipfile.lock
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+
+# PyCharm
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Environments
+.venv
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+*.lnk
+
+# Local development files
+.env.local
+.env.*.local
+local_settings.py
+
+# Celery
+celerybeat-schedule
+
+# Database
+db.sqlite3
+*.sqlite
+*.sqlite3
+
+# Static and media files
+/staticfiles/
+/media/
+*.pyc
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Coverage reports
+.coverage
+htmlcov/
+coverage.xml
+
+# Pytest cache
+.pytest_cache/
+
+# tox
+.tox/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# IDE specific
+*.vscode
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS specific
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Backup files
+*.bak
+*.backup
+*~
+*.swp
+*.swo
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Dependency directories
+node_modules/
+vendor/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Test coverage
+.coverage
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Uploaded files during development
+uploads/
+
+# Redis dump
+dump.rdb
+
+# Flower (Celery monitoring)
+*.db
+
+# Environment specific files
+.env.production
+.env.staging
+.env.development
+
+# IDE
+.vscode
+.idea
+*.sublime-workspace
+*.sublime-project
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.egg-info
+dist
+build
+.eggs
+
+# Virtual environment
+venv
+.venv
+env
+
+# Testing
+.pytest_cache
+.coverage
+htmlcov
+
+# Dependencies
+node_modules
+package-lock.json
+
+# Database
+*.sqlite
+*.sqlite3
+
+# Logs
+logs
+*.log
+
+# Temporary files
+tmp
+temp
+*.tmp
+*.bak
