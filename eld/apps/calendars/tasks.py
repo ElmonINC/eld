@@ -5,7 +5,7 @@ from django.conf import settings
 from datetime import timedelta
 import logging
 
-from apps.calendars.models import UserHoliday
+from eld.apps.calendars.models import UserHoliday
 
 logger = logging.getLogger(__name__)
 
@@ -69,8 +69,8 @@ def send_weekly_digest():
     Send weekly digest of upcoming holidays
     Runs every Monday at 8 AM
     """
-    from apps.calendars.models import UserCalendar
-    from apps.accounts.models import UserProfile
+    from eld.apps.calendars.models import UserCalendar
+    from eld.apps.accounts.models import UserProfile
     
     today = timezone.now().date()
     week_end = today + timedelta(days=7)

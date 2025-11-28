@@ -5,7 +5,7 @@ from django.utils import timezone
 from icalendar import Calendar, Event
 from datetime import datetime, timedelta
 
-from apps.calendars.models import UserCalendar, UserHoliday
+from eld.apps.calendars.models import UserCalendar, UserHoliday
 
 @login_required
 def my_calendar(request):

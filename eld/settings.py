@@ -28,16 +28,16 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.github',
-    'allauth.socialaccount.providers.apple',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.github',
+    # 'allauth.socialaccount.providers.apple',
     'django_htmx',
     'django_celery_beat',
     
     # Local apps
-    'apps.holidays',
-    'apps.calendars',
-    'apps.accounts',
+    'eld.apps.holidays',
+    'eld.apps.calendars',
+    'eld.apps.accounts',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +58,7 @@ ROOT_URLCONF = 'eld.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'eld/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'eld.wsgi.application'
 
 # Database
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgresql://eld_user:eld_secure_pass_2025@localhost:5432/eld_db')
+    'default': env.db('DATABASE_URL', default='sqlite:///db.sqlite3')
 }
 
 # Password validation
@@ -95,7 +95,7 @@ USE_TZ = True
 # Static files
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [BASE_DIR / 'eld/static']
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
@@ -114,10 +114,9 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Django-allauth settings
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_LOGIN_METHODS = {'email'}
+ACCOUNT_SIGNUP_FIELDS = ['email', 'password1', 'password2']
 LOGIN_REDIRECT_URL = '/my-calendar/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 SOCIALACCOUNT_AUTO_SIGNUP = True

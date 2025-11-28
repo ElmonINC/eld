@@ -3,9 +3,9 @@ from django.utils import timezone
 from datetime import datetime
 import logging
 
-from apps.holidays.services.holiday_fetcher import HolidayFetcher
-from apps.holidays.services.deduplicator import HolidayDeduplicator
-from apps.holidays.models import Holiday, Country, HolidayCategory
+from eld.apps.holidays.services.holiday_fetcher import HolidayFetcher
+from eld.apps.holidays.services.deduplicator import HolidayDeduplicator
+from eld.apps.holidays.models import Holiday, Country, HolidayCategory
 
 logger = logging.getLogger(__name__)
 

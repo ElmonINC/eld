@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
 from datetime import datetime
-from apps.holidays.tasks import refresh_holidays_for_year
+from eld.apps.holidays.tasks import refresh_holidays_for_year
 
 class Command(BaseCommand):
     help = 'Seed initial holiday data (2025-2027) and create categories'
@@ -17,7 +17,7 @@ class Command(BaseCommand):
         except Exception as e:
             self.stdout.write(self.style.WARNING(f'  ⚠ Could not load fixtures: {e}'))
             self.stdout.write('  Creating categories manually...')
-            from apps.holidays.models import HolidayCategory
+            from eld.apps.holidays.models import HolidayCategory
             categories = [
                 {'name': 'Public Holiday', 'slug': 'public', 'category_type': 'public', 'color': '#3B82F6', 'icon': '🏛️'},
                 {'name': 'Religious', 'slug': 'religious', 'category_type': 'religious', 'color': '#8B5CF6', 'icon': '🙏'},

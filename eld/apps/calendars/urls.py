@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.calendars import views
+from eld.apps.calendars import views
 
 app_name = 'calendars'
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.holidays.models import Country, HolidayCategory, Holiday, HolidayAlias
+from eld.apps.holidays.models import Country, HolidayCategory, Holiday, HolidayAlias
 
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):

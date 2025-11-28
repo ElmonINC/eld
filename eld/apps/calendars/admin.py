@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.calendars.models import UserCalendar, UserHoliday
+from eld.apps.calendars.models import UserCalendar, UserHoliday
 
 @admin.register(UserCalendar)
 class UserCalendarAdmin(admin.ModelAdmin):

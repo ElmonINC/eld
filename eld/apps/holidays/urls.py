@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.holidays import views
+from eld.apps.holidays import views
 
 app_name = 'holidays'
 

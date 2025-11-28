@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from apps.holidays.tasks import refresh_all_holidays
+from eld.apps.holidays.tasks import refresh_all_holidays
 
 class Command(BaseCommand):
     help = 'Refresh all holiday data from external sources'
@@ -15,7 +15,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS('Starting holiday refresh...'))
         
         if options['year']:
-            from apps.holidays.tasks import refresh_holidays_for_year
+            from eld.apps.holidays.tasks import refresh_holidays_for_year
             created, updated = refresh_holidays_for_year(options['year'])
             self.stdout.write(
                 self.style.SUCCESS(

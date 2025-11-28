@@ -9,9 +9,9 @@ from django.core.cache import cache
 from django.db.models import Q
 import hashlib
 
-from apps.holidays.models import Holiday, Country, HolidayCategory
-from apps.calendars.models import UserHoliday, UserCalendar
-from apps.holidays.decorators import cache_queryset
+from eld.apps.holidays.models import Holiday, Country, HolidayCategory
+from eld.apps.calendars.models import UserHoliday, UserCalendar
+from eld.apps.holidays.decorators import cache_queryset
 
 def discovery_view(request):
     """Main holiday discovery page"""

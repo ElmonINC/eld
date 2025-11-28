@@ -5,7 +5,7 @@ from django.contrib.postgres.fields import ArrayField
 class Country(models.Model):
     """Country model with ISO codes and flags"""
     code = models.CharField(max_length=2, unique=True, db_index=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, choices=None, db_index=True)
     flag_emoji = models.CharField(max_length=10, blank=True)
     region = models.CharField(max_length=50, blank=True)
     

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
-from apps.holidays.models import Holiday
+from eld.apps.holidays.models import Holiday
 
 class UserCalendar(models.Model):
     """User's personal calendar with unique feed URL"""

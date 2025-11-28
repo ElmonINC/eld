@@ -2,29 +2,13 @@
 
 Thank you for considering contributing to **eld**! We welcome contributions from everyone.
 
-## Development Setup
+## Getting Started
 
-### 1. Fork and Clone
-```bash
-git clone https://github.com/your-username/eld.git
-cd eld
-```
+For initial setup and quick start instructions, see **[README.md](README.md)**.
 
-### 2. Start Development Environment
-```bash
-# Make start script executable
-chmod +x start.sh
+This guide covers development conventions, code style, and contribution workflow.
 
-# Run quick start
-./start.sh
-```
-
-### 3. Create Development Branch
-```bash
-git checkout -b feature/your-feature-name
-```
-
-## Code Style
+## Development Conventions
 
 We follow these conventions:
 
@@ -122,7 +106,7 @@ Add tests in `apps/*/tests.py`:
 
 ```python
 from django.test import TestCase
-from apps.holidays.models import Holiday
+from eld.apps.holidays.models import Holiday
 
 class HolidayTestCase(TestCase):
     def test_holiday_creation(self):

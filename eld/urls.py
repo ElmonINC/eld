@@ -8,8 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('', include('apps.holidays.urls')),
-    path('', include('apps.calendars.urls')),
+    path('', include('eld.apps.holidays.urls')),
+    path('', include('eld.apps.calendars.urls')),
 ]
 
 if settings.DEBUG:
