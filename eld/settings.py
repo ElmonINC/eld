@@ -126,7 +126,7 @@ EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@eld.app')
 
 # Redis & Caching
-REDIS_URL = env('REDIS_URL', default='redis://localhost:6379/0')
+REDIS_URL = env('REDIS_URL', default='redis://lo  calhost:6379/0')
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
