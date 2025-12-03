@@ -6,9 +6,9 @@ Discover public holidays, religious observances, UN international days, and fun 
 
 ![eld Hero](https://via.placeholder.com/1200x600/8B5CF6/FFFFFF?text=eld+-+Every+Celebration+Matters)
 
-## ✨ Features
+## Features
 
-### 🌍 **Master Holiday Database**
+### **Master Holiday Database**
 - **10+ Global Sources** merged daily via Celery:
   - Nager.Date API (195+ countries)
   - Calendarific API
@@ -25,7 +25,7 @@ Discover public holidays, religious observances, UN international days, and fun 
 - **Rich Metadata** - Country flags, categories, descriptions, lunar dates
 - **Auto-refresh** - Daily Celery Beat job updates everything
 
-### 🔍 **Gorgeous Discovery Experience**
+### **Gorgeous Discovery Experience**
 Three beautiful views (zero page reloads, pure HTMX):
 - **📅 Next 7 Days** - Hero layout with live countdowns
 - **📆 This Month** - Calendar + list hybrid
@@ -36,20 +36,20 @@ Three beautiful views (zero page reloads, pure HTMX):
 - Type (Public | Religious | International | Fun/Quirky | Seasonal)
 - Search with autocomplete
 
-### ⚡ **One-Click "Add to My Calendar"**
+### **One-Click "Add to My Calendar"**
 - Login required (beautiful social + email auth)
 - Single click → confetti animation → saved
 - Bulk select mode
 - Reminder options (none / 1 day / morning of)
 
-### 📲 **Personal Calendar & Export**
+### **Personal Calendar & Export**
 The killer feature:
 - **Private iCal feed** (webcal:// compatible)
 - **One-click sync** to Google, Apple, Outlook
 - **Download .ics** anytime
 - Works perfectly with every major calendar app
 
-### 🎨 **UI/UX Perfection**
+### **UI/UX Perfection**
 - Mobile-first responsive design
 - Dark & light mode (auto + manual toggle)
 - Tailwind-powered celebration theme
@@ -57,7 +57,7 @@ The killer feature:
 - Loading skeletons, smooth transitions
 - Toast notifications
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Docker & Docker Compose
@@ -97,7 +97,7 @@ docker-compose exec web python manage.py createsuperuser
 - **Admin:** http://localhost:8000/admin
 - **Flower (Celery monitoring):** http://localhost:5555
 
-## 📚 Tech Stack
+## Tech Stack
 
 ### Backend
 - **Python 3.12** - Modern Python
@@ -125,7 +125,7 @@ docker-compose exec web python manage.py createsuperuser
 - **Whitenoise** - Static file serving
 - **Gunicorn** - Production WSGI server
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### Discovering Holidays
 
@@ -151,7 +151,7 @@ Access `/admin` to:
 - **Create categories** - Custom holiday types
 - **View users** - Monitor signups and usage
 
-## 🛠️ Management Commands
+## Management Commands
 
 ### Seed Initial Data
 ```bash
@@ -170,7 +170,7 @@ Fetch latest holidays from all 10+ sources.
 python manage.py refresh_holidays --year 2026
 ```
 
-## 🎨 Design Philosophy
+## Design Philosophy
 
 **Celebration-First:**
 - Every interaction should spark joy
@@ -190,7 +190,7 @@ python manage.py refresh_holidays --year 2026
 - Daily updates keep it fresh
 - Admin tools for curation
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 eld/
@@ -211,7 +211,7 @@ eld/
 └── requirements.txt       # Python dependencies
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -248,7 +248,7 @@ GOOGLE_OAUTH_CLIENT_SECRET=
 2. **AbstractAPI** - https://app.abstractapi.com/api/holidays/tester
 3. **Nager.Date** - No key required! https://date.nager.at
 
-## 🚀 Deployment
+## Deployment
 
 ### Production Checklist
 
@@ -284,7 +284,7 @@ celery -A eld beat --loglevel=info
 - **Redis:** Managed Redis (Redis Cloud, Upstash)
 - **Domain:** Any registrar
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Here's how:
 
@@ -300,18 +300,18 @@ We welcome contributions! Here's how:
 - Mobile apps (React Native)
 - Performance optimizations
 
-## 📝 License
+## License
 
 MIT License - see [LICENSE](LICENSE) for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Django** - The web framework for perfectionists
 - **HTMX** - High power tools for HTML
 - **Tailwind CSS** - Rapidly build modern websites
 - **All holiday data providers** - Making this possible
 
-## 📧 Contact
+## Contact
 
 - **Website:** https://eld.app (coming soon)
 - **Email:** coming soon ...
@@ -319,6 +319,6 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-**Made with ❤️ for celebration lovers worldwide**
+**Made with for celebration lovers worldwide**
 
 🎉 *Every day is a reason to celebrate* 🌍

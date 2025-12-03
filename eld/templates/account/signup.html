@@ -1,6 +1,5 @@
 {% extends 'index.html' %}
 {% load allauth %}
-{% load socialaccount %}
 
 {% block title %}Sign Up - eld{% endblock %}
 
@@ -13,19 +12,6 @@
     </div>
     
     <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8">
-        <!-- Social Signup -->
-        <div class="space-y-3 mb-6">
-            <a href="{% provider_login_url 'google' %}" class="w-full flex items-center justify-center space-x-3 px-6 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl hover:border-purple-500 dark:hover:border-purple-400 transition font-semibold">
-                <span>🔵</span>
-                <span>Continue with Google</span>
-            </a>
-            
-            <a href="{% provider_login_url 'github' %}" class="w-full flex items-center justify-center space-x-3 px-6 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl hover:border-purple-500 dark:hover:border-purple-400 transition font-semibold">
-                <span>⚫</span>
-                <span>Continue with GitHub</span>
-            </a>
-        </div>
-        
         <div class="relative mb-6">
             <div class="absolute inset-0 flex items-center">
                 <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>

@@ -6,6 +6,7 @@ from django.dispatch import receiver
 class UserProfile(models.Model):
     """Extended user profile with preferences"""
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    default_country = models.CharField(max_length=200, blank=True, null=True)
     
     # Preferences
     default_country = models.CharField(max_length=2, blank=True)

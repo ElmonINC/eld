@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     # Third party
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
+    # 'allauth.socialaccount',
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.github',
     # 'allauth.socialaccount.providers.apple',
@@ -113,13 +113,14 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-# Django-allauth settings
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
+# Allauth settings
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_LOGIN_METHODS = {'email'}
-ACCOUNT_SIGNUP_FIELDS = ['email', 'password1', 'password2']
-LOGIN_REDIRECT_URL = '/my-calendar/'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'
-SOCIALACCOUNT_AUTO_SIGNUP = True
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1', 'password2']
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+#ACCOUNT_FORMS = {
+#    'signup': 'allauth.account.forms.SignupForm'
+#}
 
 # Email settings
 EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')

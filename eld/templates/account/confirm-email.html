@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+{% load allauth %}
+
+{% block title %}Confirm Your Email - eld{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="initial-state" id="initialState">
+        <div class="icon-circle">
+            <svg viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+        </div> 
+        <h1>Confirm Your Email</h1>
+        <p class="message">
+            We've sent a confirmation link to your email address. Please check your inbox and click the link to verify your account.
+        </p>
+        <div class="email-display" id="emailDisplay">
+            user@example.com
+        </div>
+        <button class="btn" onclick="checkEmail()">Open Email App</button>
+        <div>
+            <a href="#" class="resend-link" onclick="resendEmail(event)">Didn't receive the email? Resend</a>
+        </div>
+        <p class="info-text">
+            Please check your spam folder if you don't see the email within a few minutes.
+        </p>
+    </div>
+    <div class="success-state" id="successState">
+        <div class="icon-circle">
+            <svg viewBox="0 0 24 24">
+                <polyline class="checkmark" points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+        <h1>Email Confirmed!</h1>
+        <p class="message">
+            Your email has been successfully verified. You can now access all features of your account.
+        </p>
+        <button class="btn" onclick="goToDashboard()">Go to Dashboard</button>
+    </div>
+</div>
+{% endblock %}
