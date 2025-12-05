@@ -27,9 +27,9 @@ Discover public holidays, religious observances, UN international days, and fun 
 
 ### **Gorgeous Discovery Experience**
 Three beautiful views (zero page reloads, pure HTMX):
-- **📅 Next 7 Days** - Hero layout with live countdowns
-- **📆 This Month** - Calendar + list hybrid
-- **🗓️ Full Year** - Expandable 12-month grid
+- ** Next 7 Days** - Hero layout with live countdowns
+- ** This Month** - Calendar + list hybrid
+- ** Full Year** - Expandable 12-month grid
 
 **Instant Filters:**
 - Country/Region (with flag picker)
