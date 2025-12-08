@@ -118,12 +118,17 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1', 'password2']
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 # ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 #ACCOUNT_FORMS = {
 #    'signup': 'allauth.account.forms.SignupForm'
 #}
 
 # Email settings
+# For development: Use console backend (emails print to terminal)
+# For production: Use SMTP backend with real email provider
 EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@eld.app')
 EMAIL_HOST = env('EMAIL_HOST', default='')
@@ -131,9 +136,11 @@ EMAIL_PORT = env.int('EMAIL_PORT', default=587)
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
+EMAIL_USE_SSL = env.bool('EMAIL_USE_SSL', default=False) 
+EMAIL_TIMEOUT = env.int('EMAIL_TIMEOUT', default=10)
 
 # Redis & Caching
-REDIS_URL = env('REDIS_URL', default='redis://lo  calhost:6379/0')
+REDIS_URL = env('REDIS_URL', default='redis://localhost:6379/0')
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',

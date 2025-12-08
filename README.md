@@ -230,6 +230,18 @@ DATABASE_URL=postgresql://user:pass@db:5432/eld_db
 REDIS_URL=redis://redis:6379/0
 CELERY_BROKER_URL=redis://redis:6379/0
 
+# Email Configuration (required for email verification)
+# For development: Use console backend (emails print to terminal)
+# EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+# For production: Use SMTP backend (see EMAIL_SETUP.md for details)
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=your-email@gmail.com
+EMAIL_HOST_PASSWORD=your-app-password
+DEFAULT_FROM_EMAIL="eld <noreply@eld.app>"
+
 # Holiday APIs (optional but recommended)
 NAGER_API_KEY=
 CALENDARIFIC_API_KEY=
