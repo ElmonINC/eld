@@ -291,3 +291,7 @@ tmp
 temp
 *.tmp
 *.bak
+
+# .gitignore
+API.md
+PROJECT_SUMMARY.md

@@ -6,97 +6,6 @@ Discover public holidays, religious observances, UN international days, and fun 
 
 ![eld Hero](https://via.placeholder.com/1200x600/8B5CF6/FFFFFF?text=eld+-+Every+Celebration+Matters)
 
-## Features
-
-### **Master Holiday Database**
-- **10+ Global Sources** merged daily via Celery:
-  - Nager.Date API (195+ countries)
-  - Calendarific API
-  - AbstractAPI Holidays
-  - UN Observances
-  - TimeAndDate.com
-  - Checkiday.com
-  - Wikipedia public holidays
-  - National Day Calendar
-  - Days of the Year
-  - Google public holiday calendars
-
-- **Smart Deduplication** - Fuzzy matching prevents duplicates
-- **Rich Metadata** - Country flags, categories, descriptions, lunar dates
-- **Auto-refresh** - Daily Celery Beat job updates everything
-
-### **Gorgeous Discovery Experience**
-Three beautiful views (zero page reloads, pure HTMX):
-- ** Next 7 Days** - Hero layout with live countdowns
-- ** This Month** - Calendar + list hybrid
-- ** Full Year** - Expandable 12-month grid
-
-**Instant Filters:**
-- Country/Region (with flag picker)
-- Type (Public | Religious | International | Fun/Quirky | Seasonal)
-- Search with autocomplete
-
-### **One-Click "Add to My Calendar"**
-- Login required (beautiful social + email auth)
-- Single click → confetti animation → saved
-- Bulk select mode
-- Reminder options (none / 1 day / morning of)
-
-### **Personal Calendar & Export**
-The killer feature:
-- **Private iCal feed** (webcal:// compatible)
-- **One-click sync** to Google, Apple, Outlook
-- **Download .ics** anytime
-- Works perfectly with every major calendar app
-
-### **UI/UX Perfection**
-- Mobile-first responsive design
-- Dark & light mode (auto + manual toggle)
-- Tailwind-powered celebration theme
-- Confetti animations for fun holidays
-- Loading skeletons, smooth transitions
-- Toast notifications
-
-## Quick Start
-
-### Prerequisites
-- Docker & Docker Compose
-- That's it! Everything else is containerized.
-
-### Installation
-
-1. **Clone the repository:**
-```bash
-git clone https://github.com/yourusername/eld.git
-cd eld
-```
-
-2. **Copy environment file:**
-```bash
-cp .env.example .env
-```
-
-3. **Start everything with one command:**
-```bash
-docker-compose up --build
-```
-
-4. **In a new terminal, run migrations and seed data:**
-```bash
-docker-compose exec web python manage.py migrate
-docker-compose exec web python manage.py seed_holidays
-```
-
-5. **Create a superuser:**
-```bash
-docker-compose exec web python manage.py createsuperuser
-```
-
-6. **Visit the app:**
-- **App:** http://localhost:8000
-- **Admin:** http://localhost:8000/admin
-- **Flower (Celery monitoring):** http://localhost:5555
-
 ## Tech Stack
 
 ### Backend
@@ -211,106 +120,13 @@ eld/
 └── requirements.txt       # Python dependencies
 ```
 
-## Configuration
 
-### Environment Variables
-
-Key variables in `.env`:
-
-```bash
-# Django
-SECRET_KEY=your-secret-key
-DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
-
-# Database
-DATABASE_URL=postgresql://user:pass@db:5432/eld_db
-
-# Redis & Celery
-REDIS_URL=redis://redis:6379/0
-CELERY_BROKER_URL=redis://redis:6379/0
-
-# Email Configuration (required for email verification)
-# For development: Use console backend (emails print to terminal)
-# EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
-# For production: Use SMTP backend (see EMAIL_SETUP.md for details)
-EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER=your-email@gmail.com
-EMAIL_HOST_PASSWORD=your-app-password
-DEFAULT_FROM_EMAIL="eld <noreply@eld.app>"
-
-# Holiday APIs (optional but recommended)
-NAGER_API_KEY=
-CALENDARIFIC_API_KEY=
-ABSTRACT_API_KEY=
 
 # Social Auth (optional)
 GOOGLE_OAUTH_CLIENT_ID=
 GOOGLE_OAUTH_CLIENT_SECRET=
 ```
 
-### Getting API Keys
-
-**Free tiers available:**
-
-1. **Calendarific** - https://calendarific.com/api-documentation
-2. **AbstractAPI** - https://app.abstractapi.com/api/holidays/tester
-3. **Nager.Date** - No key required! https://date.nager.at
-
-## Deployment
-
-### Production Checklist
-
-1. **Set environment:**
-```bash
-DEBUG=False
-SECRET_KEY=<strong-random-key>
-ALLOWED_HOSTS=yourdomain.com
-```
-
-2. **Use gunicorn:**
-```bash
-gunicorn eld.wsgi:application --bind 0.0.0.0:8000
-```
-
-3. **Run migrations:**
-```bash
-python manage.py migrate
-python manage.py collectstatic --noinput
-```
-
-4. **Start Celery:**
-```bash
-celery -A eld worker --loglevel=info
-celery -A eld beat --loglevel=info
-```
-
-5. **Setup HTTPS** - Use Let's Encrypt + Nginx
-
-### Recommended Services
-- **Hosting:** Railway, Render, DigitalOcean
-- **Database:** Managed PostgreSQL
-- **Redis:** Managed Redis (Redis Cloud, Upstash)
-- **Domain:** Any registrar
-
-## Contributing
-
-We welcome contributions! Here's how:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing`)
-5. Open a Pull Request
-
-**Areas we'd love help with:**
-- More holiday data sources
-- Translations (i18n)
-- Mobile apps (React Native)
-- Performance optimizations
 
 ## License
 
@@ -325,12 +141,106 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Contact
 
-- **Website:** https://eld.app (coming soon)
+- **Website:** https://eld (coming soon)
 - **Email:** coming soon ...
 - **Twitter:** coming soon ...
 
+# eld - Project Modifications & Edits Documentation
+
+This document tracks all modifications and edits made to the eld (Every Little Day) project during quality assurance and completion.
+
+**Last Updated**: November 28, 2025
+
+> **See `.github/copilot-instructions.md` for complete architecture and technical patterns.**
+
 ---
 
-**Made with for celebration lovers worldwide**
+## Summary of Changes
 
-🎉 *Every day is a reason to celebrate* 🌍
+This project underwent comprehensive quality assurance focusing on:
+- ✅ Fixing import errors preventing code execution
+- ✅ Creating missing modules referenced in code
+- ✅ Installing missing dependencies
+- ✅ Establishing AI agent guidelines
+- ✅ Code organization and documentation cleanup
+
+---
+
+## 1. Created `.github/copilot-instructions.md`
+
+**Date**: November 28, 2025  
+**Type**: New File  
+**Status**: ✅ Complete
+
+Comprehensive AI agent guide for developers working with the codebase. Contains detailed architecture, patterns, workflows, and common tasks.
+
+**Why**: Centralizes project knowledge for faster AI agent onboarding and prevents reading multiple files to understand basic patterns.
+
+
+## 2. Created `apps/holidays/services/deduplicator.py`
+
+**Date**: November 28, 2025  
+**Type**: New Module  
+**Status**: ✅ Complete
+
+Implements fuzzy matching deduplication logic for holidays from multiple sources. Handles name variations, date proximity for lunar holidays, and merges duplicate entries while preserving source attribution.
+
+**Key Features**:
+- Fuzzy name matching using difflib.SequenceMatcher (85% threshold)
+- Date proximity matching for lunar-based holidays (±3 days)
+- Source merging and smart category union
+- Data completeness optimization
+
+**Why**: Referenced in `apps/holidays/tasks.py` but was missing. Essential for handling duplicates from 10+ API sources and preventing data quality issues.
+
+
+## 3. Fixed Django Signals Import in `apps/accounts/models.py`
+
+**Date**: November 28, 2025  
+**Type**: Bug Fix  
+**Status**: ✅ Complete
+
+**Change**: Updated import from `django.db.signals` to `django.db.models.signals` (Django 5.2 compatibility)
+
+**Impact**: Enables automatic UserProfile and UserCalendar creation during user signup via Django signal handlers.
+
+
+## 4. Installed `icalendar` Package
+
+**Date**: November 28, 2025  
+**Type**: Dependency  
+**Status**: ✅ Complete
+
+Used in `apps/calendars/utils.py` to generate .ics (iCalendar) files for calendar export to Google Calendar, Apple Calendar, and Outlook.
+
+**Impact**: Enables one-click calendar sync via iCal feeds served at `/calendar/feed/{feed_token}/`
+
+## 5. Installed `django-environ` Package
+
+**Date**: November 28, 2025  
+**Type**: Dependency  
+**Status**: ✅ Complete
+
+Used in `eld/settings.py` for secure environment variable management from `.env` file.
+
+**Impact**: Prevents hardcoding sensitive data and enables environment-based configuration for Docker deployment.
+
+
+## Summary
+
+| Item | Type | Status | Impact |
+|------|------|--------|--------|
+| AI Agent Instructions | New File | ✅ | Developer productivity |
+| Holiday Deduplicator | New Module | ✅ | Data quality |
+| Django Signals | Fix | ✅ | User registration |
+| icalendar | Install | ✅ | Calendar export |
+| django-environ | Install | ✅ | Config management |
+| .gitignore | New File | ✅ | Version control hygiene |
+
+---
+
+## Files Affected
+
+- **Created**: `.github/copilot-instructions.md`, `apps/holidays/services/deduplicator.py`, `.gitignore`
+- **Modified**: `apps/accounts/models.py` (line 3)
+- **Dependencies Installed**: `icalendar`, `django-environ`
