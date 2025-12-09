@@ -6,12 +6,39 @@
 {% block content %}
 <div class="max-w-md mx-auto">
     <div class="text-center mb-8">
-        <div class="text-6xl mb-4">✨</div>
+        <!-- <div class="text-6xl mb-4">✨</div> -->
         <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-2">Join eld</h1>
         <p class="text-gray-600 dark:text-gray-400">Start celebrating every day</p>
     </div>
     
     <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8">
+        <!-- Error Messages -->
+        {% if form and form.errors %}
+            <div class="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
+                <div class="flex items-start">
+                    <!-- <span class="text-red-500 mr-2">⚠️</span> -->
+                    <div class="flex-1">
+                        {% if form.non_field_errors %}
+                            {% for error in form.non_field_errors %}
+                                <p class="text-sm text-red-600 dark:text-red-400">{{ error }}</p>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-sm text-red-600 dark:text-red-400">Please correct the errors below.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- Django messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mb-6 p-4 {% if message.tags == 'error' %}bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800{% else %}bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800{% endif %} rounded-xl">
+                    <p class="text-sm {% if message.tags == 'error' %}text-red-600 dark:text-red-400{% else %}text-blue-600 dark:text-blue-400{% endif %}">{{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+
         <div class="relative mb-6">
             <div class="absolute inset-0 flex items-center">
                 <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
@@ -30,10 +57,14 @@
                 <input 
                     type="email" 
                     name="email" 
+                    value="{% if form %}{{ form.email.value|default:'' }}{% endif %}"
                     required
-                    class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                    class="w-full px-4 py-3 rounded-xl border {% if form and form.email.errors %}border-red-500{% else %}border-gray-300 dark:border-gray-600{% endif %} bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
                     placeholder="your@email.com"
                 >
+                {% if form and form.email.errors %}
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.email.errors.0 }}</p>
+                {% endif %}
             </div>
             
             <div>
@@ -42,9 +73,12 @@
                     type="password" 
                     name="password1" 
                     required
-                    class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                    class="w-full px-4 py-3 rounded-xl border {% if form and form.password1.errors %}border-red-500{% else %}border-gray-300 dark:border-gray-600{% endif %} bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
                     placeholder="••••••••"
                 >
+                {% if form and form.password1.errors %}
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.password1.errors.0 }}</p>
+                {% endif %}
             </div>
             
             <div>
@@ -53,16 +87,19 @@
                     type="password" 
                     name="password2" 
                     required
-                    class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                    class="w-full px-4 py-3 rounded-xl border {% if form and form.password2.errors %}border-red-500{% else %}border-gray-300 dark:border-gray-600{% endif %} bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
                     placeholder="••••••••"
                 >
+                {% if form and form.password2.errors %}
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ form.password2.errors.0 }}</p>
+                {% endif %}
             </div>
             
             <button 
                 type="submit"
                 class="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transition transform hover:scale-105"
             >
-                🎉 Create Account
+                Create Account
             </button>
         </form>
         
