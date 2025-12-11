@@ -138,7 +138,7 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
 EMAIL_USE_SSL = env.bool('EMAIL_USE_SSL', default=False) 
 EMAIL_TIMEOUT = env.int('EMAIL_TIMEOUT', default=30)
-POSTMARK_API_KEY = env('YOUR_SERVER_API_TOKEN' default='')
+POSTMARK_API_KEY = env('POSTMARK_API_KEY', default='')
 
 # Redis & Caching
 REDIS_URL = env('REDIS_URL', default='redis://localhost:6379/0')
